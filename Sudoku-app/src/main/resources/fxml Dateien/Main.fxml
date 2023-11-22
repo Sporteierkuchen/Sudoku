@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Sudoku.controller.MainAppController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Sudoku.controller.MainAppController">
    <children>
       <MenuBar fx:id="menubar" layoutY="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <menus>
@@ -49,18 +49,9 @@
                   <RowConstraints vgrow="SOMETIMES" />
                 <RowConstraints vgrow="SOMETIMES" />
                 <RowConstraints vgrow="SOMETIMES" />
-                <RowConstraints vgrow="SOMETIMES" />
+                  <RowConstraints vgrow="SOMETIMES" />
+                  <RowConstraints vgrow="SOMETIMES" />
               </rowConstraints>
-               <children>
-                  <HBox stylesheets="@../css/gridPane.css" GridPane.hgrow="SOMETIMES" GridPane.vgrow="SOMETIMES" />
-                  <HBox layoutX="210.0" layoutY="10.0" stylesheets="@../css/gridPane.css" GridPane.columnIndex="1" />
-                  <HBox fillHeight="false" layoutX="210.0" layoutY="30.0" styleClass="hbox" stylesheets="@../css/gridPane.css" GridPane.columnIndex="2" />
-                  <HBox fillHeight="false" layoutX="210.0" layoutY="10.0" styleClass="hbox" stylesheets="@../css/gridPane.css" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <HBox fillHeight="false" layoutX="10.0" layoutY="10.0" styleClass="hbox" stylesheets="@../css/gridPane.css" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <HBox fillHeight="false" styleClass="hbox1" stylesheets="@../css/gridPane.css" GridPane.rowIndex="3" />
-                  <HBox fillHeight="false" layoutX="14.0" layoutY="80.0" styleClass="hbox1" stylesheets="@../css/gridPane.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <HBox fillHeight="false" layoutX="14.0" layoutY="14.0" styleClass="hbox1" stylesheets="@../css/gridPane.css" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-               </children>
             </GridPane>
          </children>
       </HBox>

@@ -1,19 +1,25 @@
 package Sudoku.controller;
 
-
 import java.awt.Toolkit;
 
 import Sudoku.MainApp;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class MainAppController {
@@ -119,12 +125,81 @@ public class MainAppController {
 		AnchorPane.setBottomAnchor(bottomHBox, Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0);
 
 		this.gridpane.setMaxHeight(Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.6);
-		this.gridpane.setMaxWidth(Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.6);
+		this.gridpane.setMaxWidth(Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.6);	
+		
+	
+			for(int row=1; row<10; row++) {
+				
+				for(int column=0; column<9; column++) {
+				
+					TextField t= new TextField();
+					t.setAlignment(Pos.CENTER);
+					t.setMaxSize(Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.062,Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.062 );
+					t.setStyle("		-fx-border-color: white ; -fx-border-width: 0 px ;   ");
+					t.setFont(Font.font("System", FontWeight.BOLD,Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.02) );
+					
+					t.textProperty().addListener(new ChangeListener<String>() {
+				        @Override
+				        public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+				        	
+				        	
+				            if (t.getText().length() > 1) {
+				                String s = t.getText().substring(0, 1);
+				                t.setText(s);
+				                
+				            }
+				     
+				            if(!t.getText().isEmpty()) {
+				     
+				            	try {
+				            	int zahl=Integer.parseInt(t.getText());
+				            	if(zahl==0) {
+				            		t.setText("");
+				            	}
+				            	
+				            }
+				            	catch(Exception e) {
+				            	
+				            	t.setText("");
+				            }
+				            	          
+				            }
+				  
+				        }
+				    });
+					
+					
+					HBox h = new HBox();
+					h.setAlignment(Pos.CENTER);
+					h.getChildren().add(t);
+					
+				 if( (row==3 || row==6) && (column==2 || column==5))   {
+						
+						h.getStyleClass().add("hbox2");
+					
+					}
+				 	else if(row==3 || row==6) {
+						
+						h.getStyleClass().add("hbox1");
+		
+					}
+				 	else if (column==2 || column==5) {
+						
+						h.getStyleClass().add("hbox");
 
-//		HBox h = new HBox();
-//
-//		h.setStyle("-fx-background-color: goldenrod;");
-//		this.gridpane.add(h, 0, 0);
+					}
+					else {
+						
+						
+					}
+		
+					this.gridpane.add(h, column, row);		
+				
+				}
+				
+		}
+	
+			
 	}
 	
 
