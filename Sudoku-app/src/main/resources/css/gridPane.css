@@ -1,0 +1,23 @@
+
+
+.gridpane {
+    -fx-background-color: white;
+    -fx-vgap: 0;
+    -fx-hgap: 0;
+    -fx-padding: 3;
+       -fx-border-width: 4 ;
+       -fx-border-color: black;
+}
+
+.hbox {
+    -fx-background-color: white;
+        -fx-border-color: black;
+    -fx-border-width: 0 3 0 0 ;
+}
+
+.hbox1 {
+    -fx-background-color: white;
+        -fx-border-color: black;
+    -fx-border-width: 3 0 0 0 ;
+     -fx-border-insets: 0 0 0 0;
+}
