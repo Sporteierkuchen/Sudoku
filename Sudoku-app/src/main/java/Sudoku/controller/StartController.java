@@ -70,8 +70,9 @@ public class StartController {
 	 * setzt alle Informationen die Angezeigt werden sollen (Raumbeschreibung,
 	 * Infotext, Spieler-Lebenspunkte und Lebensanzeige, Bild der Mapp für die
 	 * Räume, Bild des Raums
+	 * @param board 
 	 */
-	public void startwerteSetzen() {
+	public void startwerteSetzen(int[][] board) {
 
 		AnchorPane.setLeftAnchor(startVBox, 0.0);
 		AnchorPane.setRightAnchor(startVBox, 0.0);
@@ -102,7 +103,11 @@ public class StartController {
 				t.setStyle("		-fx-border-color: white ; -fx-border-width: 0 px ;   ");
 				t.setFont(Font.font("System", FontWeight.BOLD,
 						Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.02));
-
+				
+				if(board[row-1][column]!=0) {
+					t.setText(String.valueOf(board[row-1][column]));	
+				}
+				
 				t.textProperty().addListener(new ChangeListener<String>() {
 					@Override
 					public void changed(final ObservableValue<? extends String> ov, final String oldValue,
@@ -204,19 +209,19 @@ public class StartController {
 //		          };
 //		
 //		    this.solveBoard2(board);
-//		    
+		    int[][] board = this.loadBoard();
 //		    System.out.println("Counter: "+this.counter);
-		    
+		    	this.mainApp.initLösungsLayout(board);
 		if (this.ckeckBoard()) {
 
 			this.meldungstext.setText("true");
 
-			int[][] boardBefore = this.loadBoard();
-			
-			int[][] boardAfter = this.loadBoard();
 			
 			
+//			int[][] boardAfter = this.loadBoard();
 			
+			
+		
 			
 			
 //			 this.solveBoard2(boardAfter);

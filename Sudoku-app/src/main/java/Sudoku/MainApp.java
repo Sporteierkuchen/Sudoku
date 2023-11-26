@@ -3,6 +3,7 @@
  */
 package Sudoku;
 
+import Sudoku.controller.LösungController;
 import Sudoku.controller.MainAppController;
 import Sudoku.controller.StartController;
 import javafx.application.Application;
@@ -35,11 +36,23 @@ public class MainApp extends Application {
 		this.primaryStage.setMaximized(true);
 		this.primaryStage.setResizable(false);
 
+	    int[][] board = {
+	            {0, 0, 0, 0, 5, 0, 6, 0, 0},
+	            {0, 0, 0, 0, 0, 3, 0, 0, 0},
+	            {1, 0, 0, 0, 0, 9, 5, 0, 0},
+	            {8, 0, 0, 0, 0, 0, 0, 9, 0},
+	            {0, 4, 3, 0, 0, 0, 7, 5, 0},
+	            {0, 9, 0, 0, 0, 0, 0, 0, 8},
+	            {0, 0, 9, 7, 0, 0, 0, 0, 5},
+	            {0, 0, 0, 2, 0, 0, 0, 0, 0},
+	            {0, 0, 7, 0, 4, 0, 2, 0, 3} 
+	          };
+		
 		initRootLayout();
-		initStartLayout();
+		initStartLayout(board);
 	}
 
-	public void initStartLayout() {
+	public void initStartLayout(int[][] board) {
 
 
 		try {
@@ -52,7 +65,7 @@ public class MainApp extends Application {
 			StartController controller = loader.getController();
 			controller.setMainApp(this);
 			
-			controller.startwerteSetzen();
+			controller.startwerteSetzen(board);
 
 			this.rootLayout.getChildren().add(v);
 //			this.scene = new Scene(rootLayout);
@@ -99,8 +112,7 @@ public class MainApp extends Application {
 
 	}
 	
-	public void initLösungsLayout() {
-
+	public void initLösungsLayout(int[][] board) {
 
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -109,20 +121,22 @@ public class MainApp extends Application {
 //			rootLayout.setPrefHeight(Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.9);
 //			rootLayout.setPrefWidth(Toolkit.getDefaultToolkit().getScreenSize().getWidth());
 
-			MainAppController controller = loader.getController();
+			LösungController controller = loader.getController();
 			controller.setMainApp(this);
-			controller.startwerteSetzen();
+			controller.startwerteSetzen(board);
 
-			this.scene = new Scene(rootLayout);
-			primaryStage.setScene(scene);
-			primaryStage.show();
+			this.rootLayout.getChildren().remove(2);
+			this.rootLayout.getChildren().add(v);
+//			this.scene = new Scene(rootLayout);
+//			primaryStage.setScene(scene);
+//			primaryStage.show();
 
-			System.out.println("Rootlayout erfolgreich!");
+			System.out.println("Lösunglayout erfolgreich!");
 
 		} catch (Exception e) {
 
-			fehlerBeimLadenVonFxmlDateiAnzeigen("Rootlayout: " + e.getMessage());
-			System.out.println("Rootlayout: " + e.getMessage());
+			fehlerBeimLadenVonFxmlDateiAnzeigen("Lösungslayout: " + e.getMessage());
+			System.out.println("Lösungslayout: " + e.getMessage());
 
 		}
 
