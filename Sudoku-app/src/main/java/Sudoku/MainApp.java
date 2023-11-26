@@ -4,12 +4,14 @@
 package Sudoku;
 
 import Sudoku.controller.MainAppController;
+import Sudoku.controller.StartController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
@@ -34,8 +36,40 @@ public class MainApp extends Application {
 		this.primaryStage.setResizable(false);
 
 		initRootLayout();
+		initStartLayout();
 	}
 
+	public void initStartLayout() {
+
+
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("../fxml Dateien/Start.fxml"));
+			VBox v = (VBox) loader.load();
+//			rootLayout.setPrefHeight(Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.9);
+//			rootLayout.setPrefWidth(Toolkit.getDefaultToolkit().getScreenSize().getWidth());
+
+			StartController controller = loader.getController();
+			controller.setMainApp(this);
+			
+			controller.startwerteSetzen();
+
+			this.rootLayout.getChildren().add(v);
+//			this.scene = new Scene(rootLayout);
+//			primaryStage.setScene(scene);
+//			primaryStage.show();
+
+			System.out.println("Startlayout erfolgreich!");
+
+		} catch (Exception e) {
+
+			fehlerBeimLadenVonFxmlDateiAnzeigen("Startlayout: " + e.getMessage());
+			System.out.println("Startlayout: " + e.getMessage());
+
+		}
+
+	}
+	
 	public void initRootLayout() {
 
 
@@ -43,6 +77,35 @@ public class MainApp extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("../fxml Dateien/Main.fxml"));
 			this.rootLayout = (AnchorPane) loader.load();
+//			rootLayout.setPrefHeight(Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.9);
+//			rootLayout.setPrefWidth(Toolkit.getDefaultToolkit().getScreenSize().getWidth());
+
+			MainAppController controller = loader.getController();
+			controller.setMainApp(this);
+			controller.startwerteSetzen();
+
+			this.scene = new Scene(rootLayout);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+
+			System.out.println("Rootlayout erfolgreich!");
+
+		} catch (Exception e) {
+
+			fehlerBeimLadenVonFxmlDateiAnzeigen("Rootlayout: " + e.getMessage());
+			System.out.println("Rootlayout: " + e.getMessage());
+
+		}
+
+	}
+	
+	public void initLösungsLayout() {
+
+
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("../fxml Dateien/Lösung.fxml"));
+			VBox v = (VBox) loader.load();
 //			rootLayout.setPrefHeight(Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.9);
 //			rootLayout.setPrefWidth(Toolkit.getDefaultToolkit().getScreenSize().getWidth());
 
