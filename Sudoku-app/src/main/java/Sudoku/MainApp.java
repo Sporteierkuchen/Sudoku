@@ -21,6 +21,23 @@ public class MainApp extends Application {
 	private AnchorPane rootLayout;
 	private Scene scene;
 
+	private int GRID_SIZE;
+
+	private int[][] board2x2 = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
+
+	private int[][] board3x3 = { { 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0 } };
+	private int[][] board4x4 = { { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } };
 
 	public MainApp() {
 
@@ -35,42 +52,51 @@ public class MainApp extends Application {
 		this.primaryStage.setTitle("Sudoku");
 		this.primaryStage.setMaximized(true);
 		this.primaryStage.setResizable(false);
+		this.GRID_SIZE = 9;
 
-	    int[][] board = {
-	            {0, 0, 0, 0, 5, 0, 6, 0, 0},
-	            {0, 0, 0, 0, 0, 3, 0, 0, 0},
-	            {1, 0, 0, 0, 0, 9, 5, 0, 0},
-	            {8, 0, 0, 0, 0, 0, 0, 9, 0},
-	            {0, 4, 3, 0, 0, 0, 7, 5, 0},
-	            {0, 9, 0, 0, 0, 0, 0, 0, 8},
-	            {0, 0, 9, 7, 0, 0, 0, 0, 5},
-	            {0, 0, 0, 2, 0, 0, 0, 0, 0},
-	            {0, 0, 7, 0, 4, 0, 2, 0, 3} 
-	          };
-		
 		initRootLayout();
-		initStartLayout(board);
+		initStartLayout(boardübergeben());
+	}
+
+	public int[][] boardübergeben() {
+
+		switch (this.GRID_SIZE) {
+		case 4:
+
+			return board2x2;
+
+		case 9:
+
+			return board3x3;
+		case 16:
+
+			return board4x4;
+
+		default:
+			System.out.println("Fehler!");
+			break;
+		}
+		return null;
+
 	}
 
 	public void initStartLayout(int[][] board) {
-
 
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("../fxml Dateien/Start.fxml"));
 			VBox v = (VBox) loader.load();
-//			rootLayout.setPrefHeight(Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.9);
-//			rootLayout.setPrefWidth(Toolkit.getDefaultToolkit().getScreenSize().getWidth());
 
 			StartController controller = loader.getController();
 			controller.setMainApp(this);
 			
 			controller.startwerteSetzen(board);
 
+			if (this.rootLayout.getChildren().size() == 3) {
+				this.rootLayout.getChildren().remove(2);
+			}
+
 			this.rootLayout.getChildren().add(v);
-//			this.scene = new Scene(rootLayout);
-//			primaryStage.setScene(scene);
-//			primaryStage.show();
 
 			System.out.println("Startlayout erfolgreich!");
 
@@ -85,13 +111,10 @@ public class MainApp extends Application {
 	
 	public void initRootLayout() {
 
-
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("../fxml Dateien/Main.fxml"));
 			this.rootLayout = (AnchorPane) loader.load();
-//			rootLayout.setPrefHeight(Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.9);
-//			rootLayout.setPrefWidth(Toolkit.getDefaultToolkit().getScreenSize().getWidth());
 
 			MainAppController controller = loader.getController();
 			controller.setMainApp(this);
@@ -112,24 +135,18 @@ public class MainApp extends Application {
 
 	}
 	
-	public void initLösungsLayout(int[][] board) {
+	public void initLösungsLayout(int[][] board, int[][] boardToSolve) {
 
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("../fxml Dateien/Lösung.fxml"));
 			VBox v = (VBox) loader.load();
-//			rootLayout.setPrefHeight(Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.9);
-//			rootLayout.setPrefWidth(Toolkit.getDefaultToolkit().getScreenSize().getWidth());
 
 			LösungController controller = loader.getController();
 			controller.setMainApp(this);
-			controller.startwerteSetzen(board);
-
+			controller.startwerteSetzen(board, boardToSolve);
 			this.rootLayout.getChildren().remove(2);
 			this.rootLayout.getChildren().add(v);
-//			this.scene = new Scene(rootLayout);
-//			primaryStage.setScene(scene);
-//			primaryStage.show();
 
 			System.out.println("Lösunglayout erfolgreich!");
 
@@ -175,6 +192,38 @@ public class MainApp extends Application {
 
 	public Scene getScene() {
 		return scene;
+	}
+
+	public int getGRID_SIZE() {
+		return GRID_SIZE;
+	}
+
+	public void setGRID_SIZE(int gRID_SIZE) {
+		GRID_SIZE = gRID_SIZE;
+	}
+
+	public int[][] getBoard2x2() {
+		return board2x2;
+	}
+
+	public void setBoard2x2(int[][] board2x2) {
+		this.board2x2 = board2x2;
+	}
+
+	public int[][] getBoard3x3() {
+		return board3x3;
+	}
+
+	public void setBoard3x3(int[][] board3x3) {
+		this.board3x3 = board3x3;
+	}
+
+	public int[][] getBoard4x4() {
+		return board4x4;
+	}
+
+	public void setBoard4x4(int[][] board4x4) {
+		this.board4x4 = board4x4;
 	}
 
 }

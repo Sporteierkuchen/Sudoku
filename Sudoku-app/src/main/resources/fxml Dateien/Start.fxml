@@ -2,49 +2,18 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<VBox fx:id="startVBox" alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: red;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Sudoku.controller.StartController">
+<VBox fx:id="startVBox" alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Sudoku.controller.StartController">
    <children>
-      <HBox fx:id="mainHBox" alignment="CENTER" prefHeight="300.0" prefWidth="900.0" style="-fx-background-color: orange;">
-         <children>
-            <GridPane id="gridpane" fx:id="gridpane" alignment="CENTER" gridLinesVisible="true" styleClass="gridpane" stylesheets="@../css/gridPane.css">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints />
-                  <RowConstraints vgrow="SOMETIMES" />
-                  <RowConstraints vgrow="SOMETIMES" />
-                  <RowConstraints vgrow="SOMETIMES" />
-                  <RowConstraints vgrow="SOMETIMES" />
-                  <RowConstraints vgrow="SOMETIMES" />
-                  <RowConstraints vgrow="SOMETIMES" />
-                  <RowConstraints vgrow="SOMETIMES" />
-                  <RowConstraints vgrow="SOMETIMES" />
-                  <RowConstraints vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
-         </children>
-      </HBox>
+      <HBox fx:id="mainHBox" alignment="CENTER" prefHeight="300.0" prefWidth="900.0" />
       <VBox fx:id="bottomVBox" alignment="CENTER" style="-fx-background-color: grey;">
          <children>
-            <HBox fx:id="meldungsHBox" alignment="CENTER" style="-fx-background-color: green;">
+            <HBox fx:id="meldungsHBox" alignment="CENTER">
                <children>
                   <Text fx:id="meldungstext" fill="#ee0d0d" strokeType="OUTSIDE" strokeWidth="0.0">
                      <font>
@@ -53,8 +22,13 @@
                   </Text>
                </children>
             </HBox>
-            <HBox fx:id="buttonHBox" alignment="TOP_CENTER" style="-fx-background-color: blue;">
+            <HBox fx:id="buttonHBox" alignment="TOP_CENTER">
                <children>
+                  <ComboBox fx:id="gridauswahl" onAction="#handleComboBox" prefHeight="37.0">
+                     <HBox.margin>
+                        <Insets right="100.0" top="15.0" />
+                     </HBox.margin>
+                  </ComboBox>
                   <Button mnemonicParsing="false" onAction="#handleLeerenButton" text="Leeren">
                      <HBox.margin>
                         <Insets right="100.0" top="15.0" />
@@ -73,7 +47,7 @@
                   </Button>
                </children>
             </HBox>
-            <HBox fx:id="schließenHBox" alignment="BOTTOM_RIGHT" fillHeight="false" style="-fx-background-color: yellow;">
+            <HBox fx:id="schließenHBox" alignment="BOTTOM_RIGHT" fillHeight="false">
                <children>
                   <Button mnemonicParsing="false" onAction="#handleCloseButton" text="Schließen">
                      <font>
