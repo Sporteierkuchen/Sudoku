@@ -61,7 +61,7 @@ public class LösungController {
 	ArrayList<GridPane> grids = new ArrayList<>();
 	private int counter = 0;
 	  
-	private int abbruchanzahl = 500;
+	private int abbruchanzahl = 10;
 
 	@FXML
 	private void initialize() {
@@ -322,8 +322,8 @@ public class LösungController {
 									Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.06));
 							break;
 						case 9:
-							l.setMaxSize(Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.066,
-									Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.066);
+							l.setMaxSize(Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.06,
+									Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.06);
 							l.setFont(Font.font("System", FontWeight.BOLD,
 									Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.02));
 							break;
